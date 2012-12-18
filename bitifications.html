@@ -7,25 +7,58 @@
 
 <script>
 
+var user_links = {};
+var token = "";
+
 function getLinks() {
-    alert("getting links");
-    $.ajax({ url: "https://api-ssl.bitly.com/v3/user/link_history",
-             dataType: 'json',
-             data: { access_token: $('input[name="token"]').val(), limit: 10 },
-             success: gotLinks
-           }
-    )
+    token = $.trim( $('input[name="token"]').val() );
+    if (token.length != 40) {
+        $('#output')[0].innerHTML = "<h3>Error: bad access token</h3>";
+        return;
+    }
+    
+    $('input[name="start"]')[0].disabled = true;
+    $('#output')[0].innerHTML = "<br>starting ...<br>\n";
+    $.ajax({
+        url: "https://api-ssl.bitly.com/v3/user/link_history",
+        data: { access_token: token, limit: 10 },
+        dataType: 'json',
+        success: gotLinks
+    });
 }
 
 function gotLinks(data, textStatus, jqXHR) {
-    var innerHTML = "<br>\n";
-    var link_history = data.data.link_history;
-    for (var i=0; i<link_history.length; i++) {
-        link = link_history[i];
-        innerHTML += link.long_url + "\n<br>";
+    var data_list = data.data.link_history;
+    for (var i=0; i<data_list.length; i++) {
+        data_link = data_list[i];
+        user_links[data_link.link] = {
+            long_url: data_link.long_url,
+            title: data_link.title,
+            last_notify: 0
+        };
+        getClicks(data_link.link);
     }
-    console.log("innerHTML='" + innerHTML + "'");
-    $('#output')[0].innerHTML = innerHTML;
+}
+
+function getClicks(link) {
+    $('#output')[0].innerHTML += "getting clicks for " + link + " ...<br>\n";
+    $.ajax({
+        url: "https://api-ssl.bitly.com/v3/link/clicks",
+        data: { access_token: token, link: link, unit: 'minute', units: 5, rollup: 'false' },
+        dataType: 'json',
+        success: function(data, textStatus, jqXHR) { gotClicks(link, data, textStatus, jqXHR); }
+    });
+}
+
+function gotClicks(link, data, textStatus, jqXHR) {
+    var newHTML = link;
+    var data_list = data.data.link_clicks;
+    for (var i=0; i<data_list.length; i++) {
+        data_minute = data_list[i];
+        newHTML += " { dt=" + data_minute.dt + " clicks=" + data_minute.clicks + "}";
+    }
+    newHTML += "<br>\n";
+    $('#output')[0].innerHTML += newHTML;
 }
 
 $(document).ready(function(){
