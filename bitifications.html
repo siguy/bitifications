@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Demo</title>
+    <script src="jquery-1.8.3.js"></script>
+
+<script>
+
+function getLinks() {
+    alert("getting links");
+    $.ajax({ url: "https://api-ssl.bitly.com/v3/user/link_history",
+             dataType: 'json',
+             data: { access_token: $('input[name="token"]').val(), limit: 10 },
+             success: gotLinks
+           }
+    )
+}
+
+function gotLinks(data, textStatus, jqXHR) {
+    var innerHTML = "<br>\n";
+    var link_history = data.data.link_history;
+    for (var i=0; i<link_history.length; i++) {
+        link = link_history[i];
+        innerHTML += link.long_url + "\n<br>";
+    }
+    console.log("innerHTML='" + innerHTML + "'");
+    $('#output')[0].innerHTML = innerHTML;
+}
+
+$(document).ready(function(){
+    $('input[name="start"]').click(getLinks);
+});
+
+</script>
+
+  </head>
+  <body>
+    <h3>Get notifications for clicks on your bitly links!</h3>
+    <table>
+    <tr><td>Login:</td><td><input name="login" type="text"></input></td></tr>
+    <tr><td>Password:</td><td><input name="password" type="text"></input></td></tr>
+    <tr><td>Token:</td><td><input name="token" type="text"></input></td></tr>
+    </table>
+    <input value="Start" name="start" type="button"/>
+    <div id="output">
+    </div>
+  </body>
+</html>
