@@ -10,29 +10,6 @@
 var user_links = {};
 var token = "";
 
-function getToken() {
-    var login = $('input[name="login"]').val();
-    var password = $('input[name="password"]').val();
-    if (login.length == 0 || password.length == 0) {
-        $('#output')[0].innerHTML = "<h3>Error: login or password blank</h3>";
-        return;
-    }
-    $.ajax({
-        url: 'https://api-ssl.bitly.com/oauth/access_token',
-        type: "POST",
-        username: login,
-        password: password,
-        error: errorGettingToken,
-        success: gotToken
-    });
-}
-function gotToken(data, textStatus, jqXHR) {
-    $('input[name="token"]')[0].value = data;
-}
-function errorGettingToken(jqXHR, textStatus, exception) {
-    $('#output')[0].innerHTML = "<h3>Error: failed to get access token</h3><br> " + textStatus;
-}
-
 function getLinks() {
     token = $.trim( $('input[name="token"]').val() );
     if (token.length != 40) {
@@ -84,7 +61,6 @@ function gotClicks(link, data, textStatus, jqXHR) {
 
 $(document).ready(function(){
     $('input[name="start"]').click(getLinks);
-    $('input[name="generate"]').click(getToken);
 });
 
 </script>
@@ -162,14 +138,6 @@ table {color:#4B5BDB;}
   </head>
   <body>
     <h2 ALIGN="CENTER">Get notifications for clicks on your bitly links!</h3>
-    <div class="rounded"> 
-        <table>
-            <tr><td>Generate your access token.</td></tr>
-            <tr><td>Login:</td><td><input name="login" type="text"></input></td></tr>
-            <tr><td>Password:</td><td><input name="password" type="password"></input></td></tr>
-            <div><tr><td><input name="generate" value="Generate Token" type="button"/></td></tr></div>
-        </table>
-    </div>
     <br/>
 <div class="rounded3"> 
         <table>
