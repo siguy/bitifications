@@ -66,16 +66,95 @@ $(document).ready(function(){
 });
 
 </script>
+<style>
+.rounded {
+    border: 2px solid grey;
+    border-radius: 15px;
+    width: 50%;
+    margin-left: auto;
+	margin-right: auto;
+	padding: 7px;
+	color:#4B5BDB;
+}
+.rounded2 {
+    border: 2px solid grey;
+    border-radius: 15px;
+    width: 25%;
+    margin-left: auto;
+	margin-right: auto;
+	padding: 7px;
+	font: 16pt;
+	color:#4B5BDB;
+}
+.rounded3 {
+    border: 2px solid grey;
+    border-radius: 15px;
+    width: 65%;
+    margin-left: auto;
+	margin-right: auto;
+	padding: 7px;
+	font: 16pt;
+	color:#4B5BDB;
+}
 
+.tr_center{
+    margin-left: auto;
+	margin-right: auto;
+	position:relative;
+}
+
+h3 {FONT-SIZE: 28pt; COLOR:#000000}
+tr {FONT-SIZE: 12pt; COLOR:#4B5BDB}
+
+.button{
+    height:30px; 
+    width:100px; 
+    margin: -20px -50px; 
+    position:relative;
+    top:50%; 
+    left:50%;
+    padding: 30px;
+    font: 12pt;
+}
+
+#output{
+    font: 12pt;
+    padding: 7px;
+
+}
+
+body {background-image:url("images/bitly-puffer-fish.png");
+//background-color:#4B5BDB;
+table {color:#4B5BDB;}
+}
+</style>
   </head>
   <body>
-    <h3>Get notifications for clicks on your bitly links!</h3>
-    <table>
-    <tr><td>Login:</td><td><input name="login" type="text"></input></td></tr>
-    <tr><td>Password:</td><td><input name="password" type="text"></input></td></tr>
-    <tr><td>Token:</td><td><input name="token" type="text"></input></td></tr>
-    </table>
-    <input value="Start" name="start" type="button"/>
+    <h3 ALIGN="CENTER">Get notifications for clicks on your bitly links!</h3>
+    <div class="rounded"> 
+        <table>
+            <tr><td>Generate your access token.</td></tr>
+            <tr><td>Login:</td><td><input name="login" type="text"></input></td></tr>
+            <tr><td>Password:</td><td><input name="password" type="text"></input></td></tr>
+            <div><tr><td><button type="button">Generate Token</button></td></tr></div>
+        </table>
+    </div><br>
+
+<div class="rounded3"> 
+        <table>
+     <tr><td>Or run this command in terminal:</td></tr>
+            <tr><td>curl -u "username:password" -X POST "https://api-ssl.bitly.com/oauth/access_token"</td></tr>
+        </table>
+    </div><br>
+    <div class="rounded2"> 
+        <table>
+
+            <tr><td>Token: <input name="token" type="text"></input></td></tr>
+        </table>
+    </div>
+    <div class="button">
+        <input value="Start" name="start" type="button"/>
+    </div>
     <div id="output">
     </div>
   </body>
