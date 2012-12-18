@@ -92,11 +92,13 @@ $(document).ready(function(){
 .rounded {
     border: 2px solid grey;
     border-radius: 15px;
-    width: 50%;
+    width: 35%;
     margin-left: auto;
 	margin-right: auto;
 	padding: 7px;
 	color:#4B5BDB;
+	background-color:#4BB5DB;
+	font-family:Arial,Helvetica,sans-serif;
 }
 .rounded2 {
     border: 2px solid grey;
@@ -107,6 +109,8 @@ $(document).ready(function(){
 	padding: 7px;
 	font: 16pt;
 	color:#4B5BDB;
+	background-color:#4BB5DB;
+	font-family:Arial,Helvetica,sans-serif;
 }
 .rounded3 {
     border: 2px solid grey;
@@ -117,6 +121,8 @@ $(document).ready(function(){
 	padding: 7px;
 	font: 16pt;
 	color:#4B5BDB;
+	background-color:#4BB5DB;
+	font-family:Arial,Helvetica,sans-serif;
 }
 
 .tr_center{
@@ -125,8 +131,9 @@ $(document).ready(function(){
 	position:relative;
 }
 
-h3 {FONT-SIZE: 28pt; COLOR:#000000}
-tr {FONT-SIZE: 12pt; COLOR:#4B5BDB}
+h2 {FONT-SIZE: 28pt; COLOR:#000000; font-family:Arial,Helvetica,sans-serif;}
+h3 {FONT-SIZE: 36pt; COLOR:#FF0000; font-family:Arial,Helvetica,sans-serif;}
+tr {FONT-SIZE: 12pt; COLOR:#FFFFFF; font-family:Arial,Helvetica,sans-serif;}
 
 .button{
     height:30px; 
@@ -141,27 +148,29 @@ tr {FONT-SIZE: 12pt; COLOR:#4B5BDB}
 
 #output{
     font: 12pt;
+    top:50%; 
+    left:50%;
+    border-radius: 15px;
+    background-color:#4BB5DB;
     padding: 7px;
-
 }
 
 body {background-image:url("images/bitly-puffer-fish.png");
-//background-color:#4B5BDB;
 table {color:#4B5BDB;}
 }
 </style>
   </head>
   <body>
-    <h3 ALIGN="CENTER">Get notifications for clicks on your bitly links!</h3>
+    <h2 ALIGN="CENTER">Get notifications for clicks on your bitly links!</h3>
     <div class="rounded"> 
         <table>
             <tr><td>Generate your access token.</td></tr>
             <tr><td>Login:</td><td><input name="login" type="text"></input></td></tr>
-            <tr><td>Password:</td><td><input name="password" type="text"></input></td></tr>
-            <div><tr><td><button type="button">Generate Token</button></td></tr></div>
+            <tr><td>Password:</td><td><input name="password" type="password"></input></td></tr>
+            <div><tr><td><input value="Generate Token" type="button"/></td></tr></div>
         </table>
-    </div><br>
-
+    </div>
+    <br/>
 <div class="rounded3"> 
         <table>
      <tr><td>Or run this command in terminal:</td></tr>
