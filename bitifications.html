@@ -5,6 +5,8 @@
     <title>Demo</title>
     <script src="jquery-1.8.3.js"></script>
 
+
+
 <script>
 
 var user_links = {};
@@ -68,7 +70,7 @@ $(document).ready(function(){
 .rounded {
     border: 2px solid grey;
     border-radius: 15px;
-    width: 35%;
+    width: 65%;
     margin-left: auto;
 	margin-right: auto;
 	padding: 7px;
@@ -79,19 +81,7 @@ $(document).ready(function(){
 .rounded2 {
     border: 2px solid grey;
     border-radius: 15px;
-    width: 25%;
-    margin-left: auto;
-	margin-right: auto;
-	padding: 7px;
-	font: 16pt;
-	color:#4B5BDB;
-	background-color:#4BB5DB;
-	font-family:Arial,Helvetica,sans-serif;
-}
-.rounded3 {
-    border: 2px solid grey;
-    border-radius: 15px;
-    width: 65%;
+    width: 35%;
     margin-left: auto;
 	margin-right: auto;
 	padding: 7px;
@@ -139,7 +129,7 @@ table {color:#4B5BDB;}
   <body>
     <h2 ALIGN="CENTER">Get notifications for clicks on your bitly links!</h3>
     <br/>
-<div class="rounded3"> 
+<div class="rounded"> 
         <table>
      <tr><td>Or run this command in terminal:</td></tr>
             <tr><td>curl -u "username:password" -X POST "https://api-ssl.bitly.com/oauth/access_token"</td></tr>
@@ -148,7 +138,7 @@ table {color:#4B5BDB;}
     <div class="rounded2"> 
         <table>
 
-            <tr><td>Token: <input name="token" type="text"></input></td></tr>
+            <tr><td>Token: <input name="token" type="text" size="50"></input></td></tr>
         </table>
     </div>
     <div class="button">
