@@ -10,6 +10,29 @@
 var user_links = {};
 var token = "";
 
+function getToken() {
+    var login = $('input[name="login"]').val();
+    var password = $('input[name="password"]').val();
+    if (login.length == 0 || password.length == 0) {
+        $('#output')[0].innerHTML = "<h3>Error: login or password blank</h3>";
+        return;
+    }
+    $.ajax({
+        url: 'https://api-ssl.bitly.com/oauth/access_token',
+        type: "POST",
+        username: login,
+        password: password,
+        error: errorGettingToken,
+        success: gotToken
+    });
+}
+function gotToken(data, textStatus, jqXHR) {
+    $('input[name="token"]')[0].value = data;
+}
+function errorGettingToken(jqXHR, textStatus, exception) {
+    $('#output')[0].innerHTML = "<h3>Error: failed to get access token</h3><br> " + textStatus;
+}
+
 function getLinks() {
     token = $.trim( $('input[name="token"]').val() );
     if (token.length != 40) {
@@ -26,7 +49,6 @@ function getLinks() {
         success: gotLinks
     });
 }
-
 function gotLinks(data, textStatus, jqXHR) {
     var data_list = data.data.link_history;
     for (var i=0; i<data_list.length; i++) {
@@ -49,7 +71,6 @@ function getClicks(link) {
         success: function(data, textStatus, jqXHR) { gotClicks(link, data, textStatus, jqXHR); }
     });
 }
-
 function gotClicks(link, data, textStatus, jqXHR) {
     var newHTML = link;
     var data_list = data.data.link_clicks;
@@ -63,6 +84,7 @@ function gotClicks(link, data, textStatus, jqXHR) {
 
 $(document).ready(function(){
     $('input[name="start"]').click(getLinks);
+//    $('input[name="generate"]').click(getLinks);
 });
 
 </script>
